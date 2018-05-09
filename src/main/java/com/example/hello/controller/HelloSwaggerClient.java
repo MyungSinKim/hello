@@ -8,7 +8,7 @@
  * you entered into with Founder.
  *
  */
-package com.example.hello.controller.test;
+package com.example.hello.controller;
 
 import com.example.hello.dto.UserDTO;
 import io.swagger.annotations.Api;
@@ -37,7 +37,7 @@ public interface HelloSwaggerClient {
     @ApiOperation(value = "创建用户 (用户) #2018-05-09#", notes = "创建用户对象")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户ID", paramType = "path", dataType = "string", required = true),
-            @ApiImplicitParam(name = "dto", value = "UserDTO", paramType = "body", dataType = "UserDTO", required = true)
+            @ApiImplicitParam(name = "userDTO", value = "UserDTO", paramType = "body", dataType = "UserDTO", required = true)
     })
     @RequestMapping(value = "/create/{userId}", method = RequestMethod.POST)
     String create(@PathVariable("userId") String userId, @RequestBody @Valid UserDTO userDTO);
@@ -46,7 +46,7 @@ public interface HelloSwaggerClient {
     @ApiOperation(value = "更新用户 (用户) #2018-05-09#", notes = "更新用户对象")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户ID", paramType = "path", dataType = "string", required = true),
-            @ApiImplicitParam(name = "dto", value = "UserDTO", paramType = "body", dataType = "UserDTO", required = true)
+            @ApiImplicitParam(name = "userDTO", value = "UserDTO", paramType = "body", dataType = "UserDTO", required = true)
     })
     @RequestMapping(value = "/modify/{userId}", method = RequestMethod.PUT)
     String modify(@PathVariable("userId") String userId, @RequestBody @Valid UserDTO userDTO);

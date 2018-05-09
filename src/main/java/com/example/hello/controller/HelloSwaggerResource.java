@@ -8,12 +8,13 @@
  * you entered into with Founder.
  *
  */
-package com.example.hello.controller.test;
+package com.example.hello.controller;
 
 import com.example.hello.domain.UserDomain;
 import com.example.hello.dto.UserDTO;
 import com.example.hello.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -37,13 +38,13 @@ public class HelloSwaggerResource implements HelloSwaggerClient {
     }
 
     @Override
-    public String create(String userId, @Valid UserDTO userDTO) {
+    public String create(String userId, @RequestBody @Valid UserDTO userDTO) {
         UserDomain userDomain = mapper.toUserDomain(userDTO);
         return userDomain.getUserName();
     }
 
     @Override
-    public String modify(String userId, @Valid UserDTO userDTO) {
+    public String modify(String userId, @RequestBody @Valid UserDTO userDTO) {
         return null;
     }
 
