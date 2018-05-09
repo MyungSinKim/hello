@@ -24,7 +24,7 @@ public class Swagger2 {
                 .apiInfo(apiInfo())
                 .select()
                 //为当前包路径
-                .apis(RequestHandlerSelectors.basePackage("com.yin.api.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.hello.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -37,7 +37,7 @@ public class Swagger2 {
                 //页面标题
                 .title("Spring Boot 测试使用 Swagger2 构建RESTful API")
                 //创建人
-                .contact(new Contact("yin", "http://www.baidu.com", ""))
+                .contact(new Contact("yin", "http://www.baidu.com", "350369283@qq.com"))
                 //版本号
                 .version("1.0")
                 //描述

@@ -8,36 +8,45 @@
  * you entered into with Founder.
  *
  */
-package com.example.hello.cache;
+package com.example.hello.dao;
 
-import lombok.Data;
-
-import java.io.Serializable;
+import com.example.hello.entity.UserEntity;
 
 /**
  * @author LarryKoo (larrykoo@126.com)
  * @description TODO
- * @date 2018/4/17 10:34
+ * @date 2018/5/9 11:09
  * @slogon 站在巨人的肩膀上
  * @since 1.0.0
  */
-@Data
-public class ScoreCache implements Serializable {
+public interface UserDao {
 
     /**
-     * 得分IP地址
+     * 创建对象
+     *
+     * @param user
      */
-    private String ipAddress;
+    public void saveUser(UserEntity user);
+
     /**
-     * 用时秒
+     * 根据用户名查询对象
+     *
+     * @param userName
+     * @return
      */
-    private int second;
+    public UserEntity findUserByUserName(String userName);
+
     /**
-     * 得分
+     * 更新对象
+     *
+     * @param user
      */
-    private int score;
+    public void updateUser(UserEntity user);
+
     /**
-     * 得分时间
+     * 删除对象
+     *
+     * @param id
      */
-    private long timestamp;
+    public void deleteUserById(String id);
 }
