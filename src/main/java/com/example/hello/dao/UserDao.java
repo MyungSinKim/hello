@@ -10,7 +10,7 @@
  */
 package com.example.hello.dao;
 
-import com.example.hello.entity.UserEntity;
+import com.example.hello.domain.UserDomain;
 
 /**
  * @author LarryKoo (larrykoo@126.com)
@@ -26,7 +26,7 @@ public interface UserDao {
      *
      * @param user
      */
-    public void saveUser(UserEntity user);
+    public void saveUser(UserDomain user);
 
     /**
      * 根据用户名查询对象
@@ -34,14 +34,14 @@ public interface UserDao {
      * @param userName
      * @return
      */
-    public UserEntity findUserByUserName(String userName);
+    public UserDomain findUserByUserName(String userName);
 
     /**
      * 更新对象
      *
      * @param user
      */
-    public void updateUser(UserEntity user);
+    public void updateUser(UserDomain user);
 
     /**
      * 删除对象

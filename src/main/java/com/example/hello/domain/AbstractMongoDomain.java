@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
  * @slogon 站在巨人的肩膀上
  * @since 1.0.0
  */
-public abstract class AbstractMongoDomain implements Serializable {
+public abstract class AbstractMongoDomain extends AbstractDomain {
 
     private static final long serialVersionUID = -5672212600553783999L;
     @Id
@@ -115,4 +115,5 @@ public abstract class AbstractMongoDomain implements Serializable {
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
     }
+
 }

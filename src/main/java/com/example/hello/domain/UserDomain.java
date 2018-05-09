@@ -1,4 +1,4 @@
-package com.example.hello.entity;
+package com.example.hello.domain;
 
 import com.example.hello.domain.AbstractMongoDomain;
 import lombok.Data;
@@ -19,8 +19,8 @@ import java.io.Serializable;
 @Data
 @ToString
 @Document(collection = "user_info")
-public class UserEntity extends AbstractMongoDomain {
-
+public class UserDomain extends AbstractMongoDomain {
+    
     private static final long serialVersionUID = 4514785026144588722L;
     @Field("user_name")
     private String userName;

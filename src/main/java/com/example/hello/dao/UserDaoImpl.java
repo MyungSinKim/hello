@@ -1,6 +1,6 @@
 package com.example.hello.dao;
 
-import com.example.hello.entity.UserEntity;
+import com.example.hello.domain.UserDomain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserDao {
      * @param user
      */
     @Override
-    public void saveUser(UserEntity user) {
+    public void saveUser(UserDomain user) {
         mongoTemplate.save(user);
     }
 
@@ -31,9 +31,9 @@ public class UserDaoImpl implements UserDao {
      * @return
      */
     @Override
-    public UserEntity findUserByUserName(String userName) {
+    public UserDomain findUserByUserName(String userName) {
         Query query = new Query(Criteria.where("userName").is(userName));
-        UserEntity user = mongoTemplate.findOne(query, UserEntity.class);
+        UserDomain user = mongoTemplate.findOne(query, UserDomain.class);
         return user;
     }
 
@@ -43,11 +43,11 @@ public class UserDaoImpl implements UserDao {
      * @param user
      */
     @Override
-    public void updateUser(UserEntity user) {
+    public void updateUser(UserDomain user) {
         Query query = new Query(Criteria.where("id").is(user.getId()));
         Update update = new Update().set("userName", user.getUserName()).set("passWord", user.getPassWord());
         //更新查询返回结果集的第一条
-        mongoTemplate.updateFirst(query, update, UserEntity.class);
+        mongoTemplate.updateFirst(query, update, UserDomain.class);
         //更新查询返回结果集的所有
         // mongoTemplate.updateMulti(query,update,UserEntity.class);
     }
@@ -60,6 +60,6 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUserById(String id) {
         Query query = new Query(Criteria.where("id").is(id));
-        mongoTemplate.remove(query, UserEntity.class);
+        mongoTemplate.remove(query, UserDomain.class);
     }
 }
