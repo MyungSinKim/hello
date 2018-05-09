@@ -8,8 +8,9 @@
  * you entered into with Founder.
  *
  */
-package com.example.hello.controller;
+package com.example.hello.service;
 
+import com.example.hello.controller.HelloSwaggerClient;
 import com.example.hello.domain.UserDomain;
 import com.example.hello.dto.UserDTO;
 import com.example.hello.mapper.UserMapper;
