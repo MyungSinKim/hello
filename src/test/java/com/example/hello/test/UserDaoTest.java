@@ -1,4 +1,4 @@
-package com.example.hello.controller;
+package com.example.hello.test;
 
 import com.example.hello.dao.UserDao;
 import com.example.hello.domain.UserDomain;
