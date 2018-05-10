@@ -11,10 +11,8 @@
 package com.example.hello.controller;
 
 import com.example.hello.common.ResultBean;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.hello.exception.CheckException;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author LarryKoo (larrykoo@126.com)
@@ -27,8 +25,28 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloAOP {
 
     @RequestMapping(value = "/aop", method = RequestMethod.GET)
-    public ResultBean<String> aop(@RequestParam(value = "data") String data) {
+    public ResultBean<Boolean> aop(@RequestParam(value = "data") String data) {
         System.out.println("aop");
-        return new ResultBean<String>(data);
+        return new ResultBean<Boolean>(test(data));
+    }
+
+    @RequestMapping(value = "/aop2/{data}", method = RequestMethod.GET)
+    public ResultBean<Boolean> aop2(@PathVariable("data") String data) {
+        System.out.println("aop2");
+        return new ResultBean<Boolean>(test(data));
+    }
+
+    boolean test(String data) {
+        if ("1".equals(data)) {
+            return true;
+        }
+        if ("0".equals(data)) {
+            return false;
+        }
+        if ("2".equals(data)) {
+            throw new CheckException("错误2");
+        }
+
+        return false;
     }
 }

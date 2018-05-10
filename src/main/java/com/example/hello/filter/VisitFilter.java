@@ -34,13 +34,14 @@ public class VisitFilter implements Filter {
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT,DELETE");
 
-        String ipAddr = IPUtil.getIpAddr((HttpServletRequest) request);
+        HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+        String ipAddress = IPUtil.getIpAddr(httpServletRequest);
+        String url = httpServletRequest.getRequestURL().toString();
+        String method = httpServletRequest.getMethod();
 
-        //long start = System.currentTimeMillis();
         filterChain.doFilter(request, response);
-        //System.out.println("filter 耗时：" + (System.currentTimeMillis() - start));
 
-        logger.warn("请求IP地址：" + ipAddr);
+        logger.warn("IP：" + ipAddress + "，URL：" + url + "，method：" + method);
     }
 
     @Override
