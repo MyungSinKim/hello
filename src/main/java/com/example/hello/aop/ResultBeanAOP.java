@@ -18,12 +18,6 @@ import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.Enumeration;
 
 /**
  * @author LarryKoo (larrykoo@126.com)
@@ -34,8 +28,8 @@ import java.util.Enumeration;
  */
 @Aspect
 @Component
-public class ControllerAOP {
-    private static final Logger logger = LoggerFactory.getLogger(ControllerAOP.class);
+public class ResultBeanAOP {
+    private static final Logger logger = LoggerFactory.getLogger(ResultBeanAOP.class);
 
     /**
      * execution(* com.example.hello.controller..*.*(..))
@@ -48,42 +42,24 @@ public class ControllerAOP {
      * .*(..) 表示任何方法名，括号表示参数，两个点表示任何参数类型
      * execution(<修饰符模式>?<返回类型模式><方法名模式>(<参数模式>)<异常模式>?)  除了返回类型模式、方法名模式和参数模式外，其它项都是可选的。
      */
-    @Pointcut("execution(* com.example.hello.controller..*.*(..))")
-    public void webLog() {
+    @Pointcut("execution(com.example.hello.common.ResultBean com.example.hello.controller..*.*(..))")
+    public void resultBeanPointcut() {
     }
 
-
-    @Before("webLog()")
+    @Before("resultBeanPointcut()")
     public void doBefore(JoinPoint joinPoint) {
-
-        // 接收到请求，记录请求内容
         /*
-        logger.info("doBefore()");
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         */
-        // 记录下请求内容
-        /*
-         logger.info("URL : " + request.getRequestURL().toString());
-         logger.info("HTTP_METHOD : " + request.getMethod());
-         logger.info("IP : " + request.getRemoteAddr());
-         logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
-         logger.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
-         //获取所有参数方法一：
-         Enumeration<String> enu = request.getParameterNames();
-         while (enu.hasMoreElements()) {
-         String paraName = (String) enu.nextElement();
-         System.out.println(paraName + ": " + request.getParameter(paraName));
-         }*/
     }
 
-    @AfterReturning("webLog()")
+    @AfterReturning("resultBeanPointcut()")
     public void doAfterReturning(JoinPoint joinPoint) {
         // 处理完请求，返回内容
-        //logger.info("doAfterReturning()");
     }
 
-    @Around("webLog()")
+    @Around("resultBeanPointcut()")
     public Object handlerControllerMethod(ProceedingJoinPoint pjp) {
         ResultBean<?> result;
         try {
