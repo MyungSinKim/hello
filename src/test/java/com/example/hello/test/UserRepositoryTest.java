@@ -1,16 +1,16 @@
 package com.example.hello.test;
 
-import com.example.hello.dao.UserDao;
 import com.example.hello.domain.UserDomain;
-import com.example.hello.dto.UserDTO;
-import com.example.hello.mapper.UserMapper;
 import com.example.hello.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Example;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -30,7 +30,14 @@ public class UserRepositoryTest {
 
     @Test
     public void findUserByUserName() {
+        List<UserDomain> list = userRepository.findAllByName("小明");
+        System.out.println(list.size());
+    }
 
+    @Test
+    public void findByUserId() {
+        UserDomain userDomain = userRepository.findByUserId("5af508b8f445d80c5420d78a");
+        System.out.println(userDomain.getUserName());
     }
 
     @Test
@@ -42,5 +49,6 @@ public class UserRepositoryTest {
     public void deleteUserById() {
         userRepository.deleteById("");
     }
+
 
 }

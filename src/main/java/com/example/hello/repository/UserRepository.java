@@ -12,7 +12,10 @@ package com.example.hello.repository;
 
 import com.example.hello.domain.UserDomain;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @author LarryKoo (larrykoo@126.com)
@@ -23,4 +26,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends MongoRepository<UserDomain, String> {
+    @Query("{'user_name':?0}")
+    List<UserDomain> findAllByName(String name);
+
+    @Query("{'id':?0}")
+    UserDomain findByUserId(String id);
 }
