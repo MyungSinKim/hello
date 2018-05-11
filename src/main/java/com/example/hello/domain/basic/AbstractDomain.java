@@ -8,7 +8,7 @@
  * you entered into with Founder.
  *
  */
-package com.example.hello.domain;
+package com.example.hello.domain.basic;
 
 import com.alibaba.fastjson.JSON;
 

@@ -1,13 +1,10 @@
 package com.example.hello.domain;
 
-import com.example.hello.domain.AbstractMongoDomain;
+import com.example.hello.domain.basic.AbstractMongoDomain;
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import java.io.Serializable;
 
 /**
  * @author LarryKoo (larrykoo@126.com)
@@ -20,7 +17,7 @@ import java.io.Serializable;
 @ToString
 @Document(collection = "user_info")
 public class UserDomain extends AbstractMongoDomain {
-    
+
     private static final long serialVersionUID = 4514785026144588722L;
     @Field("user_name")
     private String userName;

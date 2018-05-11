@@ -8,12 +8,11 @@
  * you entered into with Founder.
  *
  */
-package com.example.hello.dto;
+package com.example.hello.dto.basic;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**

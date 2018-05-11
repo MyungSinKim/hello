@@ -10,30 +10,26 @@
  */
 package com.example.hello.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
-import com.alibaba.fastjson.JSON;
-
-import java.io.Serializable;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author LarryKoo (larrykoo@126.com)
  * @description TODO
- * @date 2018/5/9 16:32
+ * @date 2018/5/11 17:38
  * @slogon 站在巨人的肩膀上
  * @since 1.0.0
  */
-public abstract class AbstractDTO implements Serializable {
-
-    private static final long serialVersionUID = -4077279236469656216L;
-
-    public AbstractDTO() {
-    }
-
-    public String toJSON() {
-        return JSON.toJSONString(this);
-    }
-
-    public String toJSONFormat() {
-        return JSON.toJSONString(this, true);
-    }
+@ApiModel(description = "分页")
+@Data
+public class PageDTO {
+    @NotNull
+    @ApiModelProperty(value = "当前页码", required = true)
+    private Integer page;
+    @NotNull
+    @ApiModelProperty(value = "每页记录数", required = true)
+    private Integer size;
 }

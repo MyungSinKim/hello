@@ -8,12 +8,11 @@
  * you entered into with Founder.
  *
  */
-package com.example.hello.domain;
+package com.example.hello.domain.basic;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**

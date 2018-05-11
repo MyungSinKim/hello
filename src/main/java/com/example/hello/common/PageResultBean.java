@@ -13,6 +13,7 @@ package com.example.hello.common;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author LarryKoo (larrykoo@126.com)
@@ -31,14 +32,28 @@ public class PageResultBean<T> implements Serializable {
 
     private String msg = "success";
     private int code = SUCCESS;
-    private T data;
+
+    //总数
+    private Long totalCount;
+    //当前页数
+    private Integer currentPage;
+    //每页数量
+    private Integer pageSize;
+    //总页数
+    private Long totalPage;
+    //集合数据
+    private List<T> data;
 
     public PageResultBean() {
         super();
     }
 
-    public PageResultBean(T data) {
+    public PageResultBean(Long totalCount, Integer currentPage, Integer pageSize, Long totalPage, List<T> data) {
         super();
+        this.totalCount = totalCount;
+        this.currentPage = currentPage;
+        this.pageSize = pageSize;
+        this.totalPage = totalPage;
         this.data = data;
     }
 

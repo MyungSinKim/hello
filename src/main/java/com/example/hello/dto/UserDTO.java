@@ -10,10 +10,10 @@
  */
 package com.example.hello.dto;
 
+import com.example.hello.dto.basic.AbstractMongoDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
