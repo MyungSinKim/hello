@@ -10,6 +10,7 @@
  */
 package com.example.hello.aop;
 
+import com.example.hello.common.PageResultBean;
 import com.example.hello.common.ResultBean;
 import com.example.hello.exception.CheckException;
 import org.aspectj.lang.JoinPoint;
@@ -28,8 +29,8 @@ import org.springframework.stereotype.Component;
  */
 @Aspect
 @Component
-public class ResultBeanAOP {
-    private static final Logger logger = LoggerFactory.getLogger(ResultBeanAOP.class);
+public class PageResultBeanAOP {
+    private static final Logger logger = LoggerFactory.getLogger(PageResultBeanAOP.class);
 
     /**
      * execution(* com.example.hello.controller..*.*(..))
@@ -42,34 +43,34 @@ public class ResultBeanAOP {
      * .*(..) 表示任何方法名，括号表示参数，两个点表示任何参数类型
      * execution(<修饰符模式>?<返回类型模式><方法名模式>(<参数模式>)<异常模式>?)  除了返回类型模式、方法名模式和参数模式外，其它项都是可选的。
      */
-    @Pointcut("execution(com.example.hello.common.ResultBean com.example.hello.controller..*.*(..))")
-    public void pointcutResultBean() {
+    @Pointcut("execution(com.example.hello.common.PageResultBean com.example.hello.controller..*.*(..))")
+    public void pointcutPageResultBean() {
     }
 
-    @Before("pointcutResultBean()")
+    @Before("pointcutPageResultBean()")
     public void doBefore(JoinPoint joinPoint) {
         /*ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();*/
     }
 
-    @AfterReturning("pointcutResultBean()")
+    @AfterReturning("pointcutPageResultBean()")
     public void doAfterReturning(JoinPoint joinPoint) {
         // 处理完请求，返回内容
     }
 
-    @Around("pointcutResultBean()")
+    @Around("pointcutPageResultBean()")
     public Object handlerControllerMethod(ProceedingJoinPoint pjp) {
-        ResultBean<?> result;
+        PageResultBean<?> result;
         try {
-            result = (ResultBean<?>) pjp.proceed();
+            result = (PageResultBean<?>) pjp.proceed();
         } catch (Throwable e) {
             result = handlerException(pjp, e);
         }
         return result;
     }
 
-    public ResultBean<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
-        ResultBean<?> result = new ResultBean();
+    public PageResultBean<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
+        PageResultBean<?> result = new PageResultBean();
         if (e instanceof CheckException) {
             result.setMsg(e.getLocalizedMessage());
             result.setCode(ResultBean.FAIL);
