@@ -10,6 +10,7 @@
  */
 package com.example.hello.dto;
 
+import com.example.hello.dto.basic.AbstractDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -25,7 +26,7 @@ import javax.validation.constraints.NotNull;
  */
 @ApiModel(description = "分页")
 @Data
-public class PageDTO {
+public class PageDTO extends AbstractDTO {
     @NotNull
     @ApiModelProperty(value = "当前页码", required = true)
     private Integer page;

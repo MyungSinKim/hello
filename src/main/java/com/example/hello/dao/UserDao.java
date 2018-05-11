@@ -1,7 +1,9 @@
 package com.example.hello.dao;
 
 import com.example.hello.common.MongoDao;
+import com.example.hello.common.PageResultBean;
 import com.example.hello.domain.UserDomain;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -52,5 +54,10 @@ public class UserDao extends MongoDao<UserDomain> {
         this.removeById(id);
     }
 
-
+    public PageResultBean<UserDomain> pageQuery(Integer page, Integer size) {
+        Criteria criteria = Criteria.where("delFlag").is(Boolean.FALSE);
+        Query query = new Query(criteria);
+        query.with(new Sort(Sort.Direction.DESC, "createAt"));
+        return this.pageQuery(query, page, size);
+    }
 }

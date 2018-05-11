@@ -10,9 +10,16 @@
  */
 package com.example.hello.controller;
 
+import com.example.hello.common.PageResultBean;
 import com.example.hello.common.ResultBean;
+import com.example.hello.dao.UserDao;
+import com.example.hello.domain.UserDomain;
+import com.example.hello.dto.PageDTO;
 import com.example.hello.exception.CheckException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * @author LarryKoo (larrykoo@126.com)
@@ -23,6 +30,14 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 public class HelloAOP {
+
+    @Autowired
+    private UserDao userDao;
+
+    @RequestMapping(value = "/page", method = RequestMethod.POST)
+    public PageResultBean<UserDomain> page(@RequestBody @Valid PageDTO pageDTO) {
+        return userDao.pageQuery(pageDTO.getPage(), pageDTO.getSize());
+    }
 
     @RequestMapping(value = "/aop", method = RequestMethod.GET)
     public ResultBean<Boolean> aop(@RequestParam(value = "data") String data) {

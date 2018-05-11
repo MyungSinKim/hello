@@ -10,6 +10,7 @@
  */
 package com.example.hello.common;
 
+import com.example.hello.domain.UserDomain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,6 +112,21 @@ public abstract class MongoDao<T> {
     public Long getPageCount(Query query) {
         logger.info("[Mongo Dao ] getPageCount:" + query);
         return this.mongoTemplate.count(query, this.getEntityClass());
+    }
+
+    /**
+     * 分页查询
+     *
+     * @param query
+     * @param page
+     * @param size
+     * @return
+     */
+    public PageResultBean<T> pageQuery(Query query, int page, int size) {
+        List<T> dataList = this.getPageList(query, page, size);
+        Long totalCount = this.getPageCount(query);
+        Long totalPage = totalCount % size == 0 ? totalCount / size : totalCount / size + 1;
+        return new PageResultBean<T>(totalCount, page, size, totalPage, dataList);
     }
 
     /**

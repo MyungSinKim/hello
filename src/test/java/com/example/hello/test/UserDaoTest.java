@@ -1,5 +1,6 @@
 package com.example.hello.test;
 
+import com.example.hello.common.PageResultBean;
 import com.example.hello.dao.UserDao;
 import com.example.hello.domain.UserDomain;
 import com.example.hello.dto.PageDTO;
@@ -73,9 +74,7 @@ public class UserDaoTest {
         Criteria criteria = Criteria.where("delFlag").is(Boolean.FALSE);
         Query query = new Query(criteria);
         query.with(new Sort(Sort.Direction.DESC, "createAt"));
-        List<UserDomain> pageList = userDao.getPageList(query, pageDTO.getPage(), pageDTO.getSize());
-        Long totalCount = userDao.getPageCount(query);
-        Long totalPage = totalCount % pageDTO.getSize() == 0 ? totalCount / pageDTO.getSize() : totalCount / pageDTO.getSize() + 1;
-        System.out.println(totalCount);
+        PageResultBean<UserDomain> pageResultBean = userDao.pageQuery(query, pageDTO.getPage(), pageDTO.getSize());
+        System.out.println(pageResultBean);
     }
 }
