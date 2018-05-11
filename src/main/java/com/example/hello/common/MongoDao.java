@@ -90,14 +90,14 @@ public abstract class MongoDao<T> {
      * 通过条件进行分页查询
      *
      * @param query
-     * @param start
+     * @param page
      * @param size
      * @return List<T>
      */
-    public List<T> getPage(Query query, int start, int size) {
-        query.skip(start);
+    public List<T> getPageList(Query query, int page, int size) {
+        query.skip((page - 1) * size);
         query.limit(size);
-        logger.info("[Mongo Dao ] getPage:" + query + "(" + start + "," + size + ")");
+        logger.info("[Mongo Dao ] getPage:" + query + "(" + page + "," + size + ")");
         List<T> lists = this.mongoTemplate.find(query, this.getEntityClass());
         return lists;
     }
