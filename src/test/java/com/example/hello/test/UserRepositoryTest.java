@@ -30,7 +30,7 @@ public class UserRepositoryTest {
 
     @Test
     public void findUserByUserName() {
-        List<UserDomain> list = userRepository.findAllByName("小明");
+        List<UserDomain> list = userRepository.findAllByUserName("小明");
         System.out.println(list.size());
     }
 

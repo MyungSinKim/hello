@@ -27,7 +27,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends MongoRepository<UserDomain, String> {
     @Query("{'user_name':?0}")
-    List<UserDomain> findAllByName(String name);
+    List<UserDomain> findAllByUserName(String name);
 
     @Query("{'id':?0}")
     UserDomain findByUserId(String id);
