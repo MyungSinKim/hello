@@ -1,32 +1,19 @@
-/*
- * 四川生学教育科技有限公司
- * Copyright (c) 2015-2025 Founder Ltd. All Rights Reserved.
- *
- * This software is the confidential and proprietary information of
- * Founder. You shall not disclose such Confidential Information
- * and shall use it only in accordance with the terms of the agreements
- * you entered into with Founder.
- *
- */
 package com.example.hello.dao;
 
+import com.example.hello.common.MongoDao;
 import com.example.hello.domain.UserDomain;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Component;
 
-/**
- * @author LarryKoo (larrykoo@126.com)
- * @description TODO
- * @date 2018/5/9 11:09
- * @slogon 站在巨人的肩膀上
- * @since 1.0.0
- */
-public interface UserDao {
+@Component
+public class UserDao extends MongoDao<UserDomain> {
 
-    /**
-     * 创建对象
-     *
-     * @param user
-     */
-    public void saveUser(UserDomain user);
+    @Override
+    protected Class<UserDomain> getEntityClass() {
+        return UserDomain.class;
+    }
 
     /**
      * 根据用户名查询对象
@@ -34,19 +21,36 @@ public interface UserDao {
      * @param userName
      * @return
      */
-    public UserDomain findUserByUserName(String userName);
+    public UserDomain findUserByUserName(String userName) {
+        Query query = new Query(Criteria.where("userName").is(userName));
+        UserDomain user = this.findOne(query);
+        return user;
+    }
+
 
     /**
      * 更新对象
      *
      * @param user
      */
-    public void updateUser(UserDomain user);
+    public void updateUser(UserDomain user) {
+        Query query = new Query(Criteria.where("id").is(user.getId()));
+        Update update = new Update().set("userName", user.getUserName())
+                .set("passWord", user.getPassWord());
+        //更新查询返回结果集的第一条
+        this.updateFirst(query, update);
+        //更新查询返回结果集的所有
+        //this.updateMulti(query,update );
+    }
 
     /**
      * 删除对象
      *
      * @param id
      */
-    public void deleteUserById(String id);
+    public void deleteUserById(String id) {
+        this.removeById(id);
+    }
+
+
 }

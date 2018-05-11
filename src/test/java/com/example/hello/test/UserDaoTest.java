@@ -25,7 +25,7 @@ public class UserDaoTest {
         user.init("u_001");
         user.setUserName("小明");
         user.setPassWord("fffooo123");
-        userDao.saveUser(user);
+        userDao.save(user);
     }
 
     @Test
@@ -37,7 +37,7 @@ public class UserDaoTest {
     @Test
     public void updateUser() {
         UserDomain user = new UserDomain();
-        user.setId("5af29a99f445d8257877167d");
+        user.setId("5af55378f445d823a0ebc382");
         user.setUserName("天空");
         user.setPassWord("fffxxxx");
         userDao.updateUser(user);
@@ -45,7 +45,7 @@ public class UserDaoTest {
 
     @Test
     public void deleteUserById() {
-        userDao.deleteUserById("5af29a99f445d8257877167d");
+        userDao.deleteUserById("5af55378f445d823a0ebc382");
     }
 
 
